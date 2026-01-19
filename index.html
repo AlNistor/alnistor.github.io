@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToughIQ - Measure Your Mental Toughness</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Vollkorn:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Main brand colors */
+            --tolerance-primary: #8B5CF6;
+            --tolerance-light: #EDE9FE;
+            --tolerance-dark: #6D28D9;
+            
+            --fortitude-primary: #F59E0B;
+            --fortitude-light: #FEF3C7;
+            --fortitude-dark: #D97706;
+            
+            --resilience-primary: #10B981;
+            --resilience-light: #D1FAE5;
+            --resilience-dark: #059669;
+            
+            --adaptability-primary: #3B82F6;
+            --adaptability-light: #DBEAFE;
+            --adaptability-dark: #2563EB;
+            
+            /* Neutrals */
+            --bg-cream: #FEFDFB;
+            --bg-warm: #FBF9F7;
+            --text-dark: #1F2937;
+            --text-medium: #4B5563;
+            --text-light: #9CA3AF;
+            
+            /* Gradients */
+            --hero-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        body {
+            font-family: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(180deg, #F5F3FF 0%, var(--bg-cream) 100%);
+            padding: 60px 20px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 20%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(16, 185, 129, 0.06) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 30%, rgba(59, 130, 246, 0.06) 0%, transparent 40%);
+            pointer-events: none;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-icon {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-dots {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px;
+        }
+
+        .logo-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+
+        .logo-dot:nth-child(1) { background: var(--tolerance-primary); }
+        .logo-dot:nth-child(2) { background: var(--fortitude-primary); }
+        .logo-dot:nth-child(3) { background: var(--resilience-primary); }
+        .logo-dot:nth-child(4) { background: var(--adaptability-primary); }
+
+        .logo-text {
+            font-family: 'Vollkorn', Georgia, serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            letter-spacing: -0.02em;
+        }
+
+        .logo-text span {
+            color: var(--tolerance-primary);
+        }
+
+        .hero h1 {
+            font-family: 'Vollkorn', Georgia, serif;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 700;
+            color: var(--text-dark);
+            max-width: 700px;
+            margin: 0 auto 20px;
+            line-height: 1.2;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-medium);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--tolerance-primary);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 700;
+            padding: 16px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.35);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(139, 92, 246, 0.45);
+        }
+
+        /* Stats Row */
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Vollkorn', Georgia, serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--tolerance-primary);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Vollkorn', Georgia, serif;
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 16px;
+            color: var(--text-dark);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-medium);
+            max-width: 600px;
+            margin: 0 auto 50px;
+            font-size: 1.1rem;
+        }
+
+        /* The Framework Section */
+        .framework-visual {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 60px;
+        }
+
+        .framework-diagram {
+            position: relative;
+            width: 320px;
+            height: 320px;
+        }
+
+        .framework-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+            z-index: 10;
+        }
+
+        .framework-center-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-light);
+        }
+
+        .framework-center-value {
+            font-family: 'Vollkorn', Georgia, serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .framework-ring {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 35px solid;
+            border-color: var(--tolerance-primary) var(--fortitude-primary) var(--resilience-primary) var(--adaptability-primary);
+            opacity: 0.9;
+        }
+
+        .framework-labels {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .framework-label {
+            position: absolute;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+        }
+
+        .framework-label.top {
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--tolerance-primary);
+        }
+
+        .framework-label.right {
+            right: -70px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--fortitude-primary);
+        }
+
+        .framework-label.bottom {
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--resilience-primary);
+        }
+
+        .framework-label.left {
+            left: -75px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--adaptability-primary);
+        }
+
+        /* Component Cards */
+        .components-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .component-card {
+            background: white;
+            border-radius: 20px;
+            padding: 32px 28px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+        }
+
+        .component-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+        }
+
+        .component-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+        }
+
+        .component-card.tolerance::before { background: var(--tolerance-primary); }
+        .component-card.fortitude::before { background: var(--fortitude-primary); }
+        .component-card.resilience::before { background: var(--resilience-primary); }
+        .component-card.adaptability::before { background: var(--adaptability-primary); }
+
+        .component-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .component-card.tolerance .component-icon { background: var(--tolerance-light); }
+        .component-card.fortitude .component-icon { background: var(--fortitude-light); }
+        .component-card.resilience .component-icon { background: var(--resilience-light); }
+        .component-card.adaptability .component-icon { background: var(--adaptability-light); }
+
+        .component-card h3 {
+            font-family: 'Vollkorn', Georgia, serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .component-card.tolerance h3 { color: var(--tolerance-dark); }
+        .component-card.fortitude h3 { color: var(--fortitude-dark); }
+        .component-card.resilience h3 { color: var(--resilience-dark); }
+        .component-card.adaptability h3 { color: var(--adaptability-dark); }
+
+        .component-question {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+
+        .component-card p {
+            color: var(--text-medium);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Profiles Section */
+        .profiles-section {
+            background: linear-gradient(180deg, var(--bg-warm) 0%, var(--bg-cream) 100%);
+            padding: 80px 20px;
+        }
+
+        .profiles-section .section-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .profiles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .profile-card {
+            background: white;
+            border-radius: 20px;
+            padding: 28px;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-avatar svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .profile-content h4 {
+            font-family: 'Vollkorn', Georgia, serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+
+        .profile-signature {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .profile-content p {
+            color: var(--text-medium);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            background: var(--bg-cream);
+        }
+
+        .steps-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .step {
+            text-align: center;
+            max-width: 280px;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--tolerance-primary), var(--adaptability-primary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-family: 'Vollkorn', Georgia, serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .step h4 {
+            font-family: 'Vollkorn', Georgia, serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .step p {
+            color: var(--text-medium);
+            font-size: 0.95rem;
+        }
+
+        /* For Teams Section */
+        .for-teams {
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .for-teams .section-title {
+            color: white;
+        }
+
+        .for-teams .section-subtitle {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .team-features {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .team-feature {
+            background: rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 28px;
+            max-width: 280px;
+            backdrop-filter: blur(10px);
+        }
+
+        .team-feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .team-feature h4 {
+            font-family: 'Vollkorn', Georgia, serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .team-feature p {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.75);
+            line-height: 1.5;
+        }
+
+        /* Footer CTA */
+        .footer-cta {
+            text-align: center;
+            padding: 80px 20px;
+            background: var(--bg-cream);
+        }
+
+        .footer-cta h2 {
+            font-family: 'Vollkorn', Georgia, serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text-dark);
+        }
+
+        .footer-cta p {
+            color: var(--text-medium);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .stats-row {
+                gap: 30px;
+            }
+
+            .framework-diagram {
+                width: 260px;
+                height: 260px;
+            }
+
+            .framework-label {
+                font-size: 0.65rem;
+            }
+
+            .framework-label.right { right: -55px; }
+            .framework-label.left { left: -60px; }
+
+            .profile-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .steps-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="logo">
+            <div class="logo-icon">
+                <div class="logo-dots">
+                    <div class="logo-dot"></div>
+                    <div class="logo-dot"></div>
+                    <div class="logo-dot"></div>
+                    <div class="logo-dot"></div>
+                </div>
+            </div>
+            <div class="logo-text">Tough<span>IQ</span></div>
+        </div>
+
+        <h1>"Finally understand why some people thrive under pressure."</h1>
+        <p>Mental toughness isn't something you have or don't have. It's four separate skills you can measure and improve. Take 5 minutes to discover yours.</p>
+
+        <a href="#" class="cta-button">
+            Take the Free Assessment
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+        </a>
+
+        <div class="stats-row">
+            <div class="stat-item">
+                <div class="stat-number">5 min</div>
+                <div class="stat-label">Assessment Time</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">32</div>
+                <div class="stat-label">Scenario Questions</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">4</div>
+                <div class="stat-label">Core Components</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">7</div>
+                <div class="stat-label">Profile Types</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- The Framework Section -->
+    <section>
+        <h2 class="section-title">The Four Components of Mental Toughness</h2>
+        <p class="section-subtitle">Mental toughness isn't binary. It's four independent skills that combine to determine how you perform under pressure.</p>
+
+        <div class="framework-visual">
+            <div class="framework-diagram">
+                <div class="framework-ring"></div>
+                <div class="framework-center">
+                    <span class="framework-center-label">Overall</span>
+                    <span class="framework-center-value">Score</span>
+                </div>
+                <div class="framework-labels">
+                    <span class="framework-label top">Tolerance</span>
+                    <span class="framework-label right">Fortitude</span>
+                    <span class="framework-label bottom">Resilience</span>
+                    <span class="framework-label left">Adaptability</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="components-grid">
+            <div class="component-card tolerance">
+                <div class="component-icon">⚡</div>
+                <h3>Tolerance</h3>
+                <div class="component-question">"How long is your fuse?"</div>
+                <p>How much adversity, how many problems, or how long you can endure hardship before your behavior starts to change.</p>
+            </div>
+
+            <div class="component-card fortitude">
+                <div class="component-icon">🎯</div>
+                <h3>Fortitude</h3>
+                <div class="component-question">"How low do you go?"</div>
+                <p>When your threshold is crossed, how drastically does your behavior change? Do you take a deep breath, or spiral out of control?</p>
+            </div>
+
+            <div class="component-card resilience">
+                <div class="component-icon">🔄</div>
+                <h3>Resilience</h3>
+                <div class="component-question">"How fast do you bounce back?"</div>
+                <p>After a change in behavior has occurred, how long does it take you to return to your normal baseline?</p>
+            </div>
+
+            <div class="component-card adaptability">
+                <div class="component-icon">📈</div>
+                <h3>Adaptability</h3>
+                <div class="component-question">"Do you grow from it?"</div>
+                <p>How does your new baseline compare to the old? Are you better for the disruption, permanently worse, or the same?</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Types Section -->
+    <section class="profiles-section">
+        <div class="section-content">
+            <h2 class="section-title">Discover Your Mental Toughness Profile</h2>
+            <p class="section-subtitle">Based on your scores across all four components, we match you to one of seven distinct patterns.</p>
+
+            <div class="profiles-grid">
+                <div class="profile-card">
+                    <div class="profile-avatar">
+                        <svg viewBox="0 0 80 80">
+                            <circle cx="40" cy="40" r="40" fill="#FEF3C7"/>
+                            <circle cx="40" cy="32" r="14" fill="#F59E0B"/>
+                            <path d="M20 65 Q40 50 60 65" fill="#F59E0B"/>
+                            <circle cx="34" cy="30" r="2" fill="white"/>
+                            <circle cx="46" cy="30" r="2" fill="white"/>
+                            <path d="M35 38 Q40 35 45 38" stroke="#B45309" stroke-width="2" fill="none" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="profile-content">
+                        <h4>The Pressure Cooker</h4>
+                        <div class="profile-signature">High Tolerance • Low Fortitude</div>
+                        <p>Handles tremendous stress until suddenly they don't. When they finally break, the drop is significant.</p>
+                    </div>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-avatar">
+                        <svg viewBox="0 0 80 80">
+                            <circle cx="40" cy="40" r="40" fill="#D1FAE5"/>
+                            <circle cx="40" cy="32" r="14" fill="#10B981"/>
+                            <path d="M20 65 Q40 50 60 65" fill="#10B981"/>
+                            <circle cx="34" cy="30" r="2" fill="white"/>
+                            <circle cx="46" cy="30" r="2" fill="white"/>
+                            <path d="M32 38 Q40 44 48 38" stroke="#065F46" stroke-width="2" fill="none" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="profile-content">
+                        <h4>The Phoenix</h4>
+                        <div class="profile-signature">High Adaptability</div>
+                        <p>Grows from everything. Each hardship becomes fuel for improvement. Life happens for them, not to them.</p>
+                    </div>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-avatar">
+                        <svg viewBox="0 0 80 80">
+                            <circle cx="40" cy="40" r="40" fill="#EDE9FE"/>
+                            <circle cx="40" cy="32" r="14" fill="#8B5CF6"/>
+                            <path d="M20 65 Q40 50 60 65" fill="#8B5CF6"/>
+                            <ellipse cx="34" cy="30" rx="2" ry="3" fill="white"/>
+                            <ellipse cx="46" cy="30" rx="2" ry="3" fill="white"/>
+                            <path d="M34 39 L46 39" stroke="#5B21B6" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="profile-content">
+                        <h4>The Sensitive Stabilizer</h4>
+                        <div class="profile-signature">Low Tolerance • High Fortitude</div>
+                        <p>Gets bothered by everything but never spirals. Feels intensely, then moves on within hours.</p>
+                    </div>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-avatar">
+                        <svg viewBox="0 0 80 80">
+                            <circle cx="40" cy="40" r="40" fill="#DBEAFE"/>
+                            <circle cx="40" cy="32" r="14" fill="#3B82F6"/>
+                            <path d="M20 65 Q40 50 60 65" fill="#3B82F6"/>
+                            <circle cx="34" cy="30" r="2" fill="white"/>
+                            <circle cx="46" cy="30" r="2" fill="white"/>
+                            <path d="M33 40 Q40 36 47 40" stroke="#1E40AF" stroke-width="2" fill="none" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="profile-content">
+                        <h4>The Slow Recoverer</h4>
+                        <div class="profile-signature">Low Resilience</div>
+                        <p>Gets in a funk and stays there for a while. Doesn't spiral, but operates below baseline for extended periods.</p>
+                    </div>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-avatar">
+                        <svg viewBox="0 0 80 80">
+                            <circle cx="40" cy="40" r="40" fill="#FEE2E2"/>
+                            <circle cx="40" cy="32" r="14" fill="#EF4444"/>
+                            <path d="M20 65 Q40 50 60 65" fill="#EF4444"/>
+                            <circle cx="34" cy="30" r="2" fill="white"/>
+                            <circle cx="46" cy="30" r="2" fill="white"/>
+                            <path d="M33 42 Q40 36 47 42" stroke="#991B1B" stroke-width="2" fill="none" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="profile-content">
+                        <h4>The Deteriorator</h4>
+                        <div class="profile-signature">Low Adaptability</div>
+                        <p>Handles problems well in the moment, but slowly gets worse over time. Each hardship chips away a small piece.</p>
+                    </div>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-avatar">
+                        <svg viewBox="0 0 80 80">
+                            <defs>
+                                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#8B5CF6;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#3B82F6;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <circle cx="40" cy="40" r="40" fill="#F0F9FF"/>
+                            <circle cx="40" cy="32" r="14" fill="url(#grad1)"/>
+                            <path d="M20 65 Q40 50 60 65" fill="url(#grad1)"/>
+                            <circle cx="34" cy="30" r="2" fill="white"/>
+                            <circle cx="46" cy="30" r="2" fill="white"/>
+                            <path d="M32 38 Q40 45 48 38" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="profile-content">
+                        <h4>The Resilient</h4>
+                        <div class="profile-signature">High Across All Four</div>
+                        <p>Exceptional mental toughness. Almost nothing bothers them, and when it does, they recover fast and grow stronger.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <h2 class="section-title">How ToughIQ Works</h2>
+        <p class="section-subtitle">A simple, science-backed process to understand and develop your mental toughness.</p>
+
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h4>Take the Assessment</h4>
+                <p>Answer 32 scenario-based questions about how you actually behave, not how you feel. Takes just 5 minutes.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <h4>Get Your Profile</h4>
+                <p>Receive detailed scores for each component and discover which of the 7 profiles matches your pattern.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <h4>Develop Your Skills</h4>
+                <p>Get personalized recommendations to strengthen your weakest component and build lasting mental toughness.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- For Teams -->
+    <section class="for-teams">
+        <h2 class="section-title">ToughIQ for Teams</h2>
+        <p class="section-subtitle">Build mentally tough teams that thrive under pressure. Understand your organization's resilience profile.</p>
+
+        <div class="team-features">
+            <div class="team-feature">
+                <div class="team-feature-icon">📊</div>
+                <h4>Team Analytics</h4>
+                <p>See aggregated scores across your team. Identify collective strengths and development areas.</p>
+            </div>
+
+            <div class="team-feature">
+                <div class="team-feature-icon">🔒</div>
+                <h4>Privacy First</h4>
+                <p>Individual results stay private. Leaders only see anonymized, team-level insights.</p>
+            </div>
+
+            <div class="team-feature">
+                <div class="team-feature-icon">🎯</div>
+                <h4>Spot Risks Early</h4>
+                <p>Identify "Pressure Cookers" before they explode. Support team members proactively.</p>
+            </div>
+
+            <div class="team-feature">
+                <div class="team-feature-icon">📈</div>
+                <h4>Track Progress</h4>
+                <p>Measure team resilience over time. See how interventions and training impact performance.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer CTA -->
+    <section class="footer-cta">
+        <h2>Discover Your Mental Toughness Profile</h2>
+        <p>5 minutes. 32 questions. Instant results.</p>
+        <a href="#" class="cta-button">
+            Take the Free Assessment
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+        </a>
+    </section>
+</body>
+</html>
